@@ -4,16 +4,24 @@ go: 1.12.x
 services:
   - docker
 
-install:
-  - make build
-  - make start
+env:
+  - NAME=golang-daemon-starter
+  - DOCKER_IMAGE=$DOCKER_USERNAME/$NAME
+  - PORT=8080
 
 script:
+  - go test
+  - GOOS=linux GOARCH=amd64 go build -ldflags="-w -s"
+  - docker build --pull --build-arg PORT=$(port) -t $DOCKER_IMAGE .
+  - go clean
+  - docker run -p $PORT:$PORT -e PORT=$(port) --name $NAME -d $DOCKER_IMAGE
   - docker ps | grep -q golang-daemon-starter
+  - docker stop $NAME
 
 deploy:
   provider: script
   script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $DOCKER_IMAGE
   on:
     branch: master
