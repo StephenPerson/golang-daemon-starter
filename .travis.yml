@@ -5,17 +5,15 @@ services:
   - docker
 
 install:
-  - docker build -t golang-daemon-starter .
-  - docker run -d -p 8080:8080 --name golang-daemon-starter golang-daemon-starter
+  - make build
+  - make start
 
 script:
   - docker ps | grep -q golang-daemon-starter
-  - go test -v
 
 deploy:
   provider: script
   script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - 
   on:
     branch: master
