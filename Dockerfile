@@ -1,5 +1,4 @@
 FROM golang:alpine
-
 # Install git. (required for fetching dependencies)
 RUN apk update && apk add --no-cache git
 # Create appuser
