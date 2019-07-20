@@ -15,7 +15,6 @@ import (
 
 var PIDFile = "/tmp/go-test.pid"
 
-
 func savePID(pid int) {
     file, err := os.Create(PIDFile)
     if err != nil {
@@ -140,7 +139,7 @@ func main() {
             stop()
         default:
             fmt.Printf("Unknown command : %v\n", os.Args[1])
-            fmt.Printf("Usage: %s [start|stop|console]\n", os.Args[0])
+            fmt.Printf("Usage: %s [console|start|stop|status]\n", os.Args[0])
             os.Exit(1)
     }
 }
