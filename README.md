@@ -10,7 +10,8 @@
 
 ```/bin/bash
 # 1) clone git repository 
-git clone https://github.com/StephenPerson/golang-daemon-starter.git
+git clone https://github.com/StephenPerson/golang-daemon-starter.git # using git
+go get github.com/StephenPerson/golang-daemon-starter # using go
 # 2) build docker image
 make build
 # 3) start docker container
