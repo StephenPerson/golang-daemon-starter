@@ -5,20 +5,32 @@
 ## Requirements
 
 * Docker
+* Golang
 
 ## Install
+```bash
+git clone git@github.com:personjs/golang-daemon-starter.git ## using git
+go get github.com/personjs/golang-daemon-starter ## using go
+cd <project-directory>
+```
 
-```/bin/bash
-# 1) clone git repository 
-git clone https://github.com/StephenPerson/golang-daemon-starter.git # using git
-go get github.com/StephenPerson/golang-daemon-starter # using go
-# 2) build docker image
+## Local
+```bash
+# BUILD
+go build
+# RUN
+./golang-daemon-starter [console|start|stop|status]
+```
+
+## Container
+
+```bash
+# BUILD
 make build
-# 3) start docker container
-make start
-# 4) visit local http server @ localhost:8080
-## To see all available commands
-make
+# RUN
+make [run|start|stop]
+# REMOVE
+make clean
 ```
 
 ## Reference
