@@ -14,10 +14,14 @@ clean: ## - Cleanup docker
 	@docker rmi -f $(NAME) > /dev/null 2>&1 | true
 .PHONY: build
 build: ## - Build image
+	go list -f={{.GoFiles}}
 	docker build -t $(NAME) .
 .PHONY: start
 start: ## - Run container
 	docker run --net=host --name $(NAME) -d $(NAME)
+.PHONY: test
+test: ## - Run tests
+	go list -f={{.TestGoFiles}}
 .PHONY: stop
 stop: ## - Stop running container
 	@docker stop $(NAME)
